@@ -18,7 +18,7 @@ header {
     height: 10vh;
 }
 
- #view-highscore, .timer-label, #timer, #start-btn{
+#view-highscore, .timer-label, #timer, #start-btn{
     margin: auto 0;
     padding: 10px 20px;
     font-size: 20px;
@@ -26,21 +26,20 @@ header {
 }
 
 #view-highscore {
-    text-shadow: 1px 2px 0px var(--Secondary-font);
     float: left;
-}
-
-#view-highscore:hover {
-    opacity: 75%;
 }
 
 .timer-label, #timer {
     float: right;
-    display: inline-block;
-}
+ }
 
 main {
     height: 80vh;
+}
+
+#main-content {
+    width: 80vw;
+    margin: 0 auto;
 }
 
 h1, #main-content h2{
@@ -67,18 +66,29 @@ footer p {
     display:block;
     margin: auto;
     text-align: center;
-    border: 3px solid var(--Secondary-font);
-    border-radius: 10px;
+   
 }
 
-#start-btn:hover {
-    opacity: 75%;
+#view-highscore, #start-btn, .answer, .back-btn, .clear-btn {
+    border: 3px solid var(--Secondary-font);
+    border-radius: 10px;
+    background-color: #f4f0f0;
+}
+
+#start-btn, .answer, .back-btn, .clear-btn {
+    padding: 10px 10px;
+    margin: 20px auto;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+#start-btn:hover, #view-highscore:hover, .answer:hover, .back-btn:hover, .clear-btn:hover {
+    opacity: 70%;
 }
 
 
 .instructions {
-    width: 80vw;
-    margin: auto;
     padding: 20px;
     font-size: 16px;
     font-weight: 500;
@@ -104,3 +114,26 @@ footer p {
     font-size: 25px;
     font-weight: 500;
 }
+
+.question, .code-section {
+    padding: 10px 20px;
+}
+
+.answer {
+    width: 250px;
+    list-style: none;
+}
+
+.highscores, .highscore-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.highscore-initial, .highscore {
+    width: 100px;
+    padding: 10px 20px;
+}
+
+
+
+
