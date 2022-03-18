@@ -57,7 +57,7 @@ var questionId = 0;
 var timeLeft = 60;
 /* The max questions in the quiz */
 var numQuestions = 3;
-var timeInterval = 0;
+var timeInterval = 1;
 
 /* Create Start page */
 
@@ -91,24 +91,15 @@ var countDown = function () {
 };
 
 var clearPage =function () {
+    // debugger;
     if (instructionsEl) {
-        instructionsEl.remove();
-        startButtonEl.remove();
-    } else {
-        if (questionSectionEl) {
-        questionSectionEl.remove();
-        answerSectionEl.remove();
-        }
-    }
-
-    // if (mainContentEl) {
-    //     mainContentEl.remove();
-    //     var mainContentEl = document.createElement("section");
-    //     mainContentEl.id = "main-content";
-    //     quizPageEl.appendChild(mainContentEl);
-    //     console.log("#main-content section has been recreated");
-    //     console.log(mainContentEl);
-    // }
+        instructionsEl.remove();}
+    if (startButtonEl) {
+        startButtonEl.remove();}
+    if (questionSectionEl=document.querySelector(".question-section")) {
+    questionSectionEl.remove();}
+    if (answerSectionEl=document.querySelector(".answer-section")){
+    answerSectionEl.remove();}    
 
     return;
 };
@@ -129,22 +120,27 @@ var startQuiz = function () {
 
 var runQuiz = function () {
  /* Select and load questions  */
+var i = 0;
 
-for (var i = 0; i < numQuestions; i++){
+for  (i = 0; i < numQuestions; i++) {
     console.log("This is the  " + i + " time through the question loop" );
     /* randomly select a question from the question array */
-    console.log(questionObjArray.length);
-    questionId = Math.floor(Math.random() * questionObjArray.length);
+    // questionId = Math.floor(Math.random() * questionObjArray.length);
+    questionId = i;
     console.log("The question ID is " + questionId);
-
+debugger;
     loadQuestions(questionId);
 
-    /* Load listener for Quiz ansers */
-    mainContentEl.addEventListener("click", answerHandler);
+var isTrue = false;
 
-}
+    // while (!isTrue) {
+    // /* Load listener for Quiz ansers */
+    // isTrue = mainContentEl.addEventListener("click", answerHandler);
+    // }
+} 
 
 quizOver();
+
 };
 
 
@@ -183,7 +179,6 @@ var loadQuestions = function (questionId) {
      }
  }
  /* Create the list item elements for the answers */
- console.log(questionObjArray[questionId].answers.length);
  for (i = 0; i < questionObjArray[questionId].answers.length; i++) {
      var answerListItemEl = document.createElement("li");
      answerListItemEl.className = "answer";
@@ -204,48 +199,44 @@ var loadHighScores = function () {
 
 var answerHandler = function (event) {
 
-    // event.preventDefault;
+    event.preventDefault;
 
     var answer = event.target.id;
 
     switch (answer) {
         case "answer0": 
             if ( questionObjArray[questionId].correct === 0) {
-                return;
+                return true;
             } else { 
                 timeLeft = timeLeft - 20;
-                return;
+                return true;
             } 
         case "answer1":
             if ( questionObjArray[questionId].correct === 1) {
-                return;
+                return true;
             } else { 
                 timeLeft = timeLeft - 20;
-                return;
+                return true;
             } 
         case "answer2":
             if ( questionObjArray[questionId].correct === 2) {
-                return;
+                return true;
             } else { 
                 timeLeft = timeLeft - 20;
-                return;
+                return true;
             } 
         case "answer3":
             if ( questionObjArray[questionId].correct === 3) {
-                return;
+                return true;
             } else { 
                 timeLeft = timeLeft - 20;
-                return;
+                return true;
             } 
         default:
             // timeLeft = timeLeft - 20;
-            return;
+            return false;
     }
 
-
-    console.log("The answerHandler function was run");
-
-    return;
 };
 
 var quizOver = function () {
@@ -266,7 +257,7 @@ viewHighscoreButtonEl.addEventListener("click", loadHighScores);
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
 
-
+mainContentEl.addEventListener("click", answerHandler);
 
 
 
