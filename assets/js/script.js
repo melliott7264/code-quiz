@@ -19,7 +19,7 @@ var questionObjArray = [{
                 "Hi!",
                 "Hello!"
                 ],
-            correct: 1 
+            correct: 0 
             }, {
             text: "Which of these is NOT considered false?",
             code: false,
@@ -30,9 +30,34 @@ var questionObjArray = [{
                 "null",
                 "''"
                 ],
-            correct: 2 
-            }];
+            correct: 1 
+            }, {
+                text: "Given the following code for the cars array, will the 'Stop' message ever be displayed?",
+                code: true,
+                codesnips: [
+                    "for (var i = 0; i < cars.length; i++) {",
+                    "  if ( cars[i] ) {",
+                    "    console.log('Vroom');",
+                    "  } else {",
+                    "    console.log('Stop');",
+                    "  }",
+                    "}"
+                ],
+                answers: [ 
+                    "Yes, at least once",
+                    "No, never",
+                    "It depends"
+                    ],
+                correct: 2
+            }       
+        ];
+/* initializing the index for the question array */        
 var questionId = 0;
+/* The max time on the timer - allow 20s per question */
+var timeLeft = 60;
+/* The max questions in the quiz */
+var numQuestions = 3;
+var timeInterval = 0;
 
 /* Create Start page */
 
@@ -50,14 +75,15 @@ var startButtonEl = document.createElement("button");
         
 /* Timer Function */
 var countDown = function () {
-    var timeLeft = 99;
-
-    var timeInterval = setInterval(function(){
+    
+    timeInterval = setInterval(function(){
+        console.log("timeInterval  " + timeInterval);
         if ( timeLeft > 0 ) {
             timerEl.textContent = timeLeft;
             timeLeft--;
         } else {
-            clearInterval();
+            timerEl.textContent = timeLeft;
+            clearInterval(timeInterval);
             quizOver();
         }
     }, 1000);
@@ -89,28 +115,42 @@ var clearPage =function () {
  
 /* Function to load and run quiz */
 var startQuiz = function () {
+  
+   /* reinitiallize the time left */
+   timeLeft=60;
 
+   /* start the timer */
+   countDown();
+
+   /* select and load the questions */
+   runQuiz();
+   
+};
+
+var runQuiz = function () {
+ /* Select and load questions  */
+
+for (var i = 0; i < numQuestions; i++){
+    console.log("This is the  " + i + " time through the question loop" );
     /* randomly select a question from the question array */
     console.log(questionObjArray.length);
     questionId = Math.floor(Math.random() * questionObjArray.length);
     console.log("The question ID is " + questionId);
 
-    /* clear the elements in the main content section */
-    clearPage();
+    loadQuestions(questionId);
 
-    /* start the timer */
-   countDown();
+    /* Load listener for Quiz ansers */
+    mainContentEl.addEventListener("click", answerHandler);
 
-   /* load the questions */
-  
-   loadQuestions(questionId);
-  
+}
 
-   
-    return;
+quizOver();
 };
 
+
 var loadQuestions = function (questionId) {
+
+  clearPage();
 
      /* create and append question and answer sections */
      var questionSectionEl = document.createElement("div");
@@ -164,16 +204,56 @@ var loadHighScores = function () {
 
 var answerHandler = function (event) {
 
-    event.preventDefault;
+    // event.preventDefault;
+
+    var answer = event.target.id;
+
+    switch (answer) {
+        case "answer0": 
+            if ( questionObjArray[questionId].correct === 0) {
+                return;
+            } else { 
+                timeLeft = timeLeft - 20;
+                return;
+            } 
+        case "answer1":
+            if ( questionObjArray[questionId].correct === 1) {
+                return;
+            } else { 
+                timeLeft = timeLeft - 20;
+                return;
+            } 
+        case "answer2":
+            if ( questionObjArray[questionId].correct === 2) {
+                return;
+            } else { 
+                timeLeft = timeLeft - 20;
+                return;
+            } 
+        case "answer3":
+            if ( questionObjArray[questionId].correct === 3) {
+                return;
+            } else { 
+                timeLeft = timeLeft - 20;
+                return;
+            } 
+        default:
+            // timeLeft = timeLeft - 20;
+            return;
+    }
+
 
     console.log("The answerHandler function was run");
 
     return;
 };
 
-var quizOvewr = function () {
+var quizOver = function () {
 
-    console.log("The quiz is over");
+    /* stop the clock if it is not already stoped */
+    clearInterval(timeInterval);
+
+    console.log("The quiz is over.  " + timeLeft + " seconds remaining");
 
     return;
 }
@@ -186,8 +266,7 @@ viewHighscoreButtonEl.addEventListener("click", loadHighScores);
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
 
-/* Load listener for Quiz ansers */
-mainContentEl.addEventListener("click", answerHandler);
+
 
 
 
