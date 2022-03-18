@@ -208,12 +208,11 @@ var loadHighScores = function () {
     return;
 };
 
-var answerHandler = function (event) {
+var buttonHandler = function (event) {
 
     event.preventDefault;
-
+    /* check for clicks on answer buttons id="answer#" */
     var answer = event.target.id;
-
     switch (answer) {
         case "answer0": 
             if ( questionObjArray[questionId].correct === 0) {
@@ -255,6 +254,23 @@ var answerHandler = function (event) {
             break;
     }
 
+    /* check for class names for other buttons */
+    var classButtons=event.target.className;
+
+    switch (classButtons) {
+        case "init-btn":
+            break;
+
+        case "back-btn":
+            break;
+
+        case "clear-btn":
+            break;
+        default:
+            break;
+
+    }
+return;
 };
 
 var quizOver = function () {
@@ -313,8 +329,8 @@ var inputButtonEl=document.createElement("input");
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
 
-/* Load listener for answer buttons */
-mainContentEl.addEventListener("click", answerHandler);
+/* Load listener for answer, initial submit, back and clear buttons */
+mainContentEl.addEventListener("click", buttonHandler);
 
 /* Load listener for High Score button */
 viewHighscoreButtonEl.addEventListener("click", loadHighScores);
