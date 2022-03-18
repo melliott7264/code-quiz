@@ -266,8 +266,49 @@ var quizOver = function () {
 
     clearPage();
 
+    /* Build All Done! page with score */
+var doneHeadEl=document.createElement("h2");
+    doneHeadEl.textContent="All Done!";
+    mainContentEl.appendChild(doneHeadEl);
+
+var scoreDivEl=document.createElement("div");
+    scoreDivEl.className="score-align";
+    mainContentEl.appendChild(scoreDivEl);
+
+var scoreLabelEl=document.createElement("p");
+    scoreLabelEl.className="score-label";
+    scoreLabelEl.textContent="Score:  ";
+    scoreDivEl.appendChild(scoreLabelEl);
+
+var scoreEl=document.createElement("span");
+    scoreEl.id="score";
+    scoreEl.textContent=timeLeft;
+    scoreDivEl.appendChild(scoreEl);
+
+var formInitialsEl=document.createElement("form");
+    formInitialsEl.className="form-initials";
+    mainContentEl.appendChild(formInitialsEl);
+
+var labelInitialsEl=document.createElement("label");
+    labelInitialsEl.className="init-label";
+    labelInitialsEl.htmlFor="initials";
+    labelInitialsEl.textContent="Initials:";
+    formInitialsEl.appendChild(labelInitialsEl);
+
+var inputInitialsEl=document.createElement("input");
+    inputInitialsEl.id="initials";
+    inputInitialsEl.name="initials";
+    inputInitialsEl.type="text";
+    formInitialsEl.appendChild(inputInitialsEl);
+
+var inputButtonEl=document.createElement("input");
+    inputButtonEl.className="init-btn";
+    inputButtonEl.type="submit";
+    inputButtonEl.value="Submit";
+    formInitialsEl.appendChild(inputButtonEl);
+
     return;
-}
+};
 
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
