@@ -58,6 +58,7 @@ var timeLeft = 60;
 /* The max questions in the quiz */
 var numQuestions = 3;
 var timeInterval = 1;
+var questionCounter = 0;
 
 /* Create Start page */
 
@@ -82,8 +83,8 @@ var countDown = function () {
             timerEl.textContent = timeLeft;
             timeLeft--;
         } else {
-            timerEl.textContent = timeLeft;
             clearInterval(timeInterval);
+            timerEl.textContent = timeLeft;
             quizOver();
         }
     }, 1000);
@@ -110,6 +111,9 @@ var startQuiz = function () {
    /* reinitiallize the time left */
    timeLeft=60;
 
+   /* reinitialize the question counter */
+   questionCounter=0;
+
    /* start the timer */
    countDown();
 
@@ -118,29 +122,36 @@ var startQuiz = function () {
    
 };
 
+/* This function randomly selects a question and passes that question to the loadQuestions function */
 var runQuiz = function () {
  /* Select and load questions  */
-var i = 0;
 
-for  (i = 0; i < numQuestions; i++) {
-    console.log("This is the  " + i + " time through the question loop" );
+if (questionCounter < numQuestions){
+    console.log("This is the  " + questionCounter + " time through the question loop" );
     /* randomly select a question from the question array */
     // questionId = Math.floor(Math.random() * questionObjArray.length);
-    questionId = i;
+    questionId = questionCounter;
     console.log("The question ID is " + questionId);
-debugger;
+
     loadQuestions(questionId);
-
-var isTrue = false;
-
-    // while (!isTrue) {
-    // /* Load listener for Quiz ansers */
-    // isTrue = mainContentEl.addEventListener("click", answerHandler);
-    // }
 } 
+else {
+    quizOver();
+}
+return;
+};
 
-quizOver();
-
+/* This function increments the question counter and ends the game when the specified number of questions has been answered */
+var nextQuestion = function () {
+    questionCounter++;
+    if (questionCounter === numQuestions) {
+        quizOver();
+    }
+    else 
+    {
+        runQuiz();
+    }
+    return;
 };
 
 
@@ -206,35 +217,42 @@ var answerHandler = function (event) {
     switch (answer) {
         case "answer0": 
             if ( questionObjArray[questionId].correct === 0) {
-                return true;
+                nextQuestion();
+                break;
             } else { 
                 timeLeft = timeLeft - 20;
-                return true;
+                nextQuestion();
+                break;
             } 
         case "answer1":
             if ( questionObjArray[questionId].correct === 1) {
-                return true;
+                nextQuestion();
+                break;
             } else { 
                 timeLeft = timeLeft - 20;
-                return true;
+                nextQuestion();
+                break;
             } 
         case "answer2":
             if ( questionObjArray[questionId].correct === 2) {
-                return true;
+                nextQuestion();
+                break;
             } else { 
                 timeLeft = timeLeft - 20;
-                return true;
+                nextQuestion();
+                break;
             } 
         case "answer3":
             if ( questionObjArray[questionId].correct === 3) {
-                return true;
+                nextQuestion();
+                break;
             } else { 
                 timeLeft = timeLeft - 20;
-                return true;
+                nextQuestion();
+                break;
             } 
         default:
-            // timeLeft = timeLeft - 20;
-            return false;
+            break;
     }
 
 };
@@ -243,21 +261,20 @@ var quizOver = function () {
 
     /* stop the clock if it is not already stoped */
     clearInterval(timeInterval);
-
+    timerEl.textContent = timeLeft;
     console.log("The quiz is over.  " + timeLeft + " seconds remaining");
+
+    clearPage();
 
     return;
 }
 
-
-
-/* Load listener for High Score button */
-viewHighscoreButtonEl.addEventListener("click", loadHighScores);
-
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
 
+/* Load listener for answer buttons */
 mainContentEl.addEventListener("click", answerHandler);
 
-
+/* Load listener for High Score button */
+viewHighscoreButtonEl.addEventListener("click", loadHighScores);
 
