@@ -65,6 +65,7 @@ var timeInterval = 1;
 /* Used to track the current question across functions */
 var questionCounter = 0;
 /* Used to save the high scores and initials */
+var scoresObj = new Object ();
 var scoresObjArray = [];
 
 /* Create Start page */
@@ -86,10 +87,12 @@ var countDown = function () {
     
     timeInterval = setInterval(function(){
         console.log("timeInterval  " + timeInterval);
+        /* The timer counts down changing the displayed seconds every second.  This runs in the background. */
         if ( timeLeft > 0 ) {
             timerEl.textContent = timeLeft;
             timeLeft--;
         } else {
+            /* When the timer reaches 0, the timer is stopped, the timer is updated to reflect 0 seconds, and the game is ended */
             clearInterval(timeInterval);
             timerEl.textContent = timeLeft;
             quizOver();
@@ -98,12 +101,16 @@ var countDown = function () {
 
 };
 
+/* This function clears away the unneeded elementes between dynamic page updates */
 var clearPage =function () {
-    // debugger;
+
+    /* Start Page Elements to be cleared */
     if (instructionsEl) {
         instructionsEl.remove();}
     if (startButtonEl) {
         startButtonEl.remove();}
+
+    /* Questions Page Elements to be cleared */
     if (questionSectionEl=document.querySelector(".question-section")) {
     questionSectionEl.remove();}
     if (answerSectionEl=document.querySelector(".answer-section")){
@@ -137,12 +144,15 @@ if (questionCounter < numQuestions){
     console.log("This is the  " + questionCounter + " time through the question loop" );
     /* randomly select a question from the question array */
     // questionId = Math.floor(Math.random() * questionObjArray.length);
+
+    /* Just using the following expression while the question database is so limited */
     questionId = questionCounter;
     console.log("The question ID is " + questionId);
 
     loadQuestions(questionId);
 } 
 else {
+    /* The quiz is over */
     quizOver();
 }
 return;
@@ -151,23 +161,25 @@ return;
 /* This function increments the question counter and ends the game when the specified number of questions has been answered */
 var nextQuestion = function () {
     questionCounter++;
+    /* end the game when the maximum number of question has been answered */
     if (questionCounter === numQuestions) {
         quizOver();
     }
     else 
     {
+        /* Load another question */
         runQuiz();
     }
     return;
 };
 
-
+/* This function actually builds the question page for each new question */
 var loadQuestions = function (questionId) {
 
   clearPage();
 
-     /* create and append question and answer sections */
-     var questionSectionEl = document.createElement("div");
+/* create and append question and answer sections */
+var questionSectionEl = document.createElement("div");
      questionSectionEl.className="question-section";
      mainContentEl.appendChild(questionSectionEl);
 
@@ -208,13 +220,34 @@ var loadQuestions = function (questionId) {
     return;
 };
 
+var saveInitials = function () {
+    debugger;
+    /* Get the initials */
+    var initialsEl = document.getElementById("initials");
+    var initials = initialsEl.value;
+
+    /* Save the initials and score(timeLeft) to scoresObjArray */
+    scoresObj.initials = initials;
+    scoresObj.score = timeLeft;
+    console.log(scoresObj);
+    scoresObjArray.push(scoresObj);
+    console.log(scoresObjArray);
+
+    /* Save scoresObjArray to localStorage */
+    localStorage.setItem("scores)", JSON.stringify(scoresObjArray));
+
+    loadHighScores();
+    return;
+};
+
 var loadHighScores = function () {
 
     console.log("View Highscore button was clicked");
 
-    return;
+ 
 };
 
+/* This function evaluates clicks on the answer buttons as well as the intials submit, back and clear buttons */
 var buttonHandler = function (event) {
 
     event.preventDefault;
@@ -222,10 +255,13 @@ var buttonHandler = function (event) {
     var answer = event.target.id;
     switch (answer) {
         case "answer0": 
+           
             if ( questionObjArray[questionId].correct === 0) {
+                 /* On a correct answer, just load a new question */
                 nextQuestion();
                 break;
             } else { 
+                /* On an incorrect answer, subtract 20 seconds from the timer and load a new question */
                 timeLeft = timeLeft - 20;
                 nextQuestion();
                 break;
@@ -266,6 +302,7 @@ var buttonHandler = function (event) {
 
     switch (classButtons) {
         case "init-btn":
+            saveInitials();
             break;
 
         case "back-btn":
@@ -277,7 +314,7 @@ var buttonHandler = function (event) {
             break;
 
     }
-return;
+
 };
 
 var quizOver = function () {
