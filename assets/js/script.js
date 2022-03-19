@@ -3,8 +3,11 @@
 var quizPageEl = document.querySelector("#quiz-page");
 var viewHighscoreButtonEl = document.querySelector("#view-highscore");
 var timerEl = document.querySelector("#timer");
+/* This defines the element holding all the dynamic content */
 var mainContentEl = document.querySelector("#main-content");
+/* The quiz instructions displayed on the Start page */
 var instructions = "This is a timed quiz on JavaScript.  The goal is to answer four multiple choice questions correctly in the least amount of time.  Your score is the time remaining on the clock once all the questions are answered.  The clock will start at 90 seconds.  You will loose 20 seconds for each incorrect answer.  Click the Start button to begin the test.  Good Luck!";
+/* The object array holding all the quiz questions and answers */
 var questionObjArray = [{
             text: "In the following code, what would be logged to the console?",
             code: true,
@@ -57,8 +60,12 @@ var questionId = 0;
 var timeLeft = 60;
 /* The max questions in the quiz */
 var numQuestions = 3;
+/* The setInterval ID */
 var timeInterval = 1;
+/* Used to track the current question across functions */
 var questionCounter = 0;
+/* Used to save the high scores and initials */
+var scoresObjArray = [];
 
 /* Create Start page */
 
