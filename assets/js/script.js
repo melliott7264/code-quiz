@@ -64,6 +64,13 @@ var numQuestions = 3;
 var timeInterval = 1;
 /* Used to track the current question across functions */
 var questionCounter = 0;
+var scoresObjArray = [{
+                initials: "ABC",
+                score:  0
+                }, {
+                initials: "DEF",
+                score:  0    
+                }];              
 
 /* Create Start page */
 
@@ -227,7 +234,12 @@ var questionSectionEl = document.createElement("div");
 
 /* This function needs to check the score against the high score for this player and update it in localStorage if it is higher */
 var saveInitials = function () {
-debugger;
+// debugger;
+
+    /* initialize flags */
+    var initialFlagSet = false;
+    var highscoreFlagSet = false;
+
     /* Get the initials, button element  and heading element(if needed) */
     var initials = document.getElementById("initials").value;
     var mainHeadingEl = document.getElementById("main-heading");
@@ -235,56 +247,30 @@ debugger;
     /* Load the highscores database from localStorage */
     if (localStorage.getItem("scores")) {
         var highScores = localStorage.getItem("scores");
-        var scoresObjArray = JSON.parse(highScores);
-        console.log(scoresObjArray.length);
-    
+        scoresObjArray = JSON.parse(highScores);
+            
         /* Find initials in database */
-        /* If scoresObjArray is an array of multiple objects */
-        if (scoresObjArray.length) { 
-            for (i=0; i<scoresObjArray.length; i++) {
-                if (scoresObjArray[i].initials === initials) {
-                    var initialFlagSet = true;
-                    /* Compare current score to highscore and if current score is higher update it */
-                    var highScore = scoresObjArray[i].score;
-                    if (timeLeft > highScore) {
-                        var highscore = true;
-                        mainHeadingEl.textContent="You have a new High Score!";
-                        scoresObjArray[i].score = timeLeft;
-                    }
-                }
-            }
-        } else { /* if scoresObjArray is an single object */
-                if (scoresObjArray.initials === initials) {
-                var initialFlagSet = true;
+        for (i=0; i<scoresObjArray.length; i++) {
+            if (scoresObjArray[i].initials === initials) {
+                initialFlagSet = true;
                 /* Compare current score to highscore and if current score is higher update it */
-                var highScore = scoresObjArray.score;
-                    if (timeLeft > highScore) {
-                        var highscore = true;
-                        mainHeadingEl.textContent="You have a new High Score!";
-                        scoresObjArray.score = timeLeft;
-                    }
-
+                var highScore = scoresObjArray[i].score;
+                if (timeLeft > highScore) {
+                    highscoreFlagSet = true;
+                    mainHeadingEl.textContent="You have a new High Score!";
+                    scoresObjArray[i].score = timeLeft;
                 }
-            }
-        /* If the initials are not in the database, add them along with the score */
-        if (!initialFlagSet) {
-            var highscore = true;
-            console.log("You have a new high Score");
-            mainHeadingEl.textContent="You have a new High Score!";
-            var scoresObj = new Object();
-            scoresObj.initials = initials;
-            scoresObj.score = timeLeft;
-            var scoresObjArray = scoresObj;
+            } 
         }
-    } else {
-        /* If a local database does not exist, create it in the scoresObjArray  to be saved in the next step */
-        var highscore = true;
-        console.log("You have a new high Score");
-        mainHeadingEl.textContent="You have a new High Score!";
-        var scoresObj = new Object();
-        scoresObj.initials = initials;
-        scoresObj.score = timeLeft;
-        var scoresObjArray = scoresObj;
+    } 
+    /* If the a local database does not exist or the initials not found in it add the initials to the scoresObjArray to be saved in the next step */
+    if (!initialFlagSet || !localStorage.getItem("scores")) {
+    highscoreFlagSet = true;
+    mainHeadingEl.textContent="You have a new High Score!";
+    var scoresObj = new Object();
+    scoresObj.initials = initials;
+    scoresObj.score = timeLeft;
+    scoresObjArray.push(scoresObj);
     }
 
     /* Save scoresObjArray to localStorage */
@@ -299,7 +285,7 @@ debugger;
     mainContentEl.appendChild(restartButtonEl);
 
 
-    if (highscore) {
+    if (highscoreFlagSet) {
         loadHighScores();
     }
 
