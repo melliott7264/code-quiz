@@ -222,7 +222,6 @@ var saveInitials = function () {
 
     /* Get the initials, button element  and heading element(if needed) */
     var initials = document.getElementById("initials").value;
-    var restartButtonEl = document.querySelector(".init-btn");
     var mainHeadingEl = document.getElementById("main-heading");
 
     /* Load the highscores database from localStorage */
@@ -239,6 +238,7 @@ var saveInitials = function () {
                 /* Compare current score to highscore and if current score is higher update it */
                 var highScore = scoresObjArray[i].score;
                 if (timeLeft > highScore) {
+                    var highscore = true;
                     console.log("You have a new high score!");
                     mainHeadingEl.textContent="You have a new High Score!";
                     scoresObjArray[i].score = timeLeft;
@@ -247,6 +247,7 @@ var saveInitials = function () {
         }
         /* If the initials are not in the database, add them along with the score */
         if (!initialFlagSet) {
+            var highscore = true;
             console.log("You have a new high Score");
             mainHeadingEl.textContent="You have a new High Score!";
             var scoresObj = new Object();
@@ -256,6 +257,7 @@ var saveInitials = function () {
         }
     } else {
         /* If a local database does not exist, create it in the scoresObjArray  to be saved in the next step */
+        var highscore = true;
         console.log("You have a new high Score");
         mainHeadingEl.textContent="You have a new High Score!";
         var scoresObj = new Object();
@@ -267,14 +269,20 @@ var saveInitials = function () {
     /* Save scoresObjArray to localStorage */
     localStorage.setItem("scores", JSON.stringify(scoresObjArray));
 
-    /* Change Submit button to ReStart button */
-    restartButtonEl.id="restart-btn";
-    restartButtonEl.value="ReStart";
+    /* Display page without form */
+    var initFormEl = document.querySelector(".form-initials");
+    initFormEl.remove();
+    var restartButtonEl = document.createElement("button");
+    restartButtonEl.className="restart-btn";
+    restartButtonEl.textContent="ReStart";
+    mainContentEl.appendChild(restartButtonEl);
 
-    /* Load listener for restart button */
-    restartButtonEl.addEventListener("click", startQuiz);
 
-};
+    if (highscore) {
+        loadHighScores();
+    }
+
+ };
 
 /* Placeholder for high scores page function */
 var loadHighScores = function () {
@@ -413,8 +421,6 @@ startButtonEl.addEventListener("click", startQuiz);
 
 /* Load listener for answer, initial submit, restart, back and clear buttons */
 mainContentEl.addEventListener("click", buttonHandler);
-
-
 
 /* Load listener for High Score button */
 viewHighscoreButtonEl.addEventListener("click", loadHighScores);

@@ -75,18 +75,18 @@ footer p {
 }
 
 /* Default button appearance */
-#view-highscore, #start-btn, .answer, .back-btn, .clear-btn, .init-btn {
+#view-highscore, #start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
     border: 3px solid var(--Secondary-font);
     border-radius: 10px;
     background-color: #f4f0f0;
 }
-#start-btn, .answer, .back-btn, .clear-btn, .init-btn {
+#start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
     padding: 10px 10px;
     margin: 20px auto;
     font-size: 20px;
     font-weight: 700;
 }
-#start-btn:hover, #view-highscore:hover, .answer:hover, .back-btn:hover, .clear-btn:hover {
+#start-btn:hover, #view-highscore:hover, .answer:hover, .back-btn:hover, .clear-btn:hover, .init-btn:hover, .restart-btn:hover {
     opacity: 70%;
 }
 /* End default button appearance */
@@ -135,6 +135,10 @@ footer p {
 .init-label, #initials {
     font-size: 25px;
     font-weight: 500;
+}
+
+.restart-btn {
+    text-align: center;
 }
 /* End of Done! page styling */
 
