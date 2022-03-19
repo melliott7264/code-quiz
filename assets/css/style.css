@@ -138,7 +138,7 @@ footer p {
 }
 
 .restart-btn {
-    text-align: center;
+    display: block;
 }
 /* End of Done! page styling */
 

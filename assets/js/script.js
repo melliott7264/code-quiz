@@ -113,6 +113,14 @@ var clearPage =function () {
     if (answerSectionEl=document.querySelector(".answer-section")){
     answerSectionEl.remove();}    
 
+    /* Done Page Elements to be cleared */
+    if (doneHeadEl=document.querySelector("#main-heading")) {
+        doneHeadEl.remove();}
+    if (scoreDivEl=document.querySelector(".score-align")) {
+        scoreDivEl.remove();}
+    if (restartButtonEl=document.querySelector(".restart-btn")) {
+        restartButtonEl.remove();}   
+
     return;
 };
  
@@ -305,7 +313,11 @@ var buttonHandler = function (event) {
                 break;
             } else { 
                 /* On an incorrect answer, subtract 20 seconds from the timer and load a new question */
-                timeLeft = timeLeft - 20;
+                if (timeLeft >=20){
+                    timeLeft = timeLeft - 20;
+                } else { 
+                    timeLeft = 0
+                }
                 nextQuestion();
                 break;
             } 
@@ -314,7 +326,11 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                timeLeft = timeLeft - 20;
+                if (timeLeft >=20){
+                    timeLeft = timeLeft - 20;
+                } else { 
+                    timeLeft = 0;
+                }
                 nextQuestion();
                 break;
             } 
@@ -323,7 +339,11 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                timeLeft = timeLeft - 20;
+                if (timeLeft >=20){
+                    timeLeft = timeLeft - 20;
+                } else { 
+                    timeLeft = 0;
+                }
                 nextQuestion();
                 break;
             } 
@@ -332,7 +352,11 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                timeLeft = timeLeft - 20;
+                if (timeLeft >=20){
+                    timeLeft = timeLeft - 20;
+                } else { 
+                    timeLeft = 0;
+                }
                 nextQuestion();
                 break;
             } 
