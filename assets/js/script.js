@@ -64,9 +64,6 @@ var numQuestions = 3;
 var timeInterval = 1;
 /* Used to track the current question across functions */
 var questionCounter = 0;
-/* Used to save the high scores and initials */
-var scoresObj = new Object ();
-var scoresObjArray = [];
 
 /* Create Start page */
 
@@ -220,29 +217,67 @@ var questionSectionEl = document.createElement("div");
     return;
 };
 
+/* This function needs to check the score against the high score for this player and update it in localStorage if it is higher */
 var saveInitials = function () {
-    debugger;
-    /* Get the initials */
-    var initialsEl = document.getElementById("initials");
-    var initials = initialsEl.value;
 
-    /* Save the initials and score(timeLeft) to scoresObjArray */
-    scoresObj.initials = initials;
-    scoresObj.score = timeLeft;
-    console.log(scoresObj);
-    scoresObjArray.push(scoresObj);
-    console.log(scoresObjArray);
+    /* Get the initials, button element  and heading element(if needed) */
+    var initials = document.getElementById("initials").value;
+    var restartButtonEl = document.querySelector(".init-btn");
+    var mainHeadingEl = document.getElementById("main-heading");
+
+    /* Load the highscores database from localStorage */
+    if (localStorage.getItem("scores")) {
+        var highScores = localStorage.getItem("scores");
+        console.log(highScores);
+        var scoresObjArray = JSON.parse(highScores);
+        console.log(scoresObjArray);
+    
+        /* Find initials in database */
+        for (i=0; i<scoresObjArray.length;i++) {
+            if (scoresObjArray[i].initials === initials) {
+                var initialFlagSet = true;
+                /* Compare current score to highscore and if current score is higher update it */
+                var highScore = scoresObjArray[i].score;
+                if (timeLeft > highScore) {
+                    console.log("You have a new high score!");
+                    mainHeadingEl.textContent="You have a new High Score!";
+                    scoresObjArray[i].score = timeLeft;
+                }
+            }
+        }
+        /* If the initials are not in the database, add them along with the score */
+        if (!initialFlagSet) {
+            console.log("You have a new high Score");
+            mainHeadingEl.textContent="You have a new High Score!";
+            var scoresObj = new Object();
+            scoresObj.initials = initials;
+            scoresObj.score = timeLeft;
+            var scoresObjArray = scoresObj;
+        }
+    } else {
+        /* If a local database does not exist, create it in the scoresObjArray  to be saved in the next step */
+        console.log("You have a new high Score");
+        mainHeadingEl.textContent="You have a new High Score!";
+        var scoresObj = new Object();
+        scoresObj.initials = initials;
+        scoresObj.score = timeLeft;
+        var scoresObjArray = scoresObj;
+    }
 
     /* Save scoresObjArray to localStorage */
-    localStorage.setItem("scores)", JSON.stringify(scoresObjArray));
+    localStorage.setItem("scores", JSON.stringify(scoresObjArray));
 
-    loadHighScores();
-    return;
+    /* Change Submit button to ReStart button */
+    restartButtonEl.id="restart-btn";
+    restartButtonEl.value="ReStart";
+
+    /* Load listener for restart button */
+    restartButtonEl.addEventListener("click", startQuiz);
+
 };
 
+/* Placeholder for high scores page function */
 var loadHighScores = function () {
-
-    console.log("View Highscore button was clicked");
 
  
 };
@@ -304,7 +339,9 @@ var buttonHandler = function (event) {
         case "init-btn":
             saveInitials();
             break;
-
+        case "restart-btn":
+            startQuiz();
+            break;
         case "back-btn":
             break;
 
@@ -328,6 +365,7 @@ var quizOver = function () {
 
     /* Build All Done! page with score */
 var doneHeadEl=document.createElement("h2");
+    doneHeadEl.id="main-heading";
     doneHeadEl.textContent="All Done!";
     mainContentEl.appendChild(doneHeadEl);
 
@@ -373,8 +411,10 @@ var inputButtonEl=document.createElement("input");
 /* Load listener for Start button */
 startButtonEl.addEventListener("click", startQuiz);
 
-/* Load listener for answer, initial submit, back and clear buttons */
+/* Load listener for answer, initial submit, restart, back and clear buttons */
 mainContentEl.addEventListener("click", buttonHandler);
+
+
 
 /* Load listener for High Score button */
 viewHighscoreButtonEl.addEventListener("click", loadHighScores);
