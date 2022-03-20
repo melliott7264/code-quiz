@@ -8,6 +8,7 @@ var mainContentEl = document.querySelector("#main-content");
 /* The quiz instructions displayed on the Start page */
 var instructions = "This is a timed quiz on JavaScript.  The goal is to answer four multiple choice questions correctly in the least amount of time.  Your score is the time remaining on the clock once all the questions are answered.  The clock will start at 90 seconds.  You will loose 20 seconds for each incorrect answer.  Click the Start button to begin the test.  Good Luck!";
 /* The object array holding all the quiz questions and answers */
+/* The questions came from the Boot Camp async lessons and from W3Schools */
 var questionObjArray = [{
             text: "In the following code, what would be logged to the console?",
             code: true,
@@ -52,14 +53,231 @@ var questionObjArray = [{
                     "It depends"
                     ],
                 correct: 2
-            }       
-        ];
+            }, {
+                text: "Inside which HTML element do we put the JavaScript?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "<js>",
+                    "<javascript",
+                    "<scripting>",
+                    "<script>"
+                    ],
+                correct: 3 
+            },  {
+                text: "Where is the correct place to insert a JavaScript?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "The <head> section",
+                    "Both the <head> section and the <body> section are correct",
+                    "The <body> section"
+                    ],
+                correct: 1 
+            },  {
+                text: "What is the correct syntax for referring to an external script called 'xxx.js'?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "<script name='xxx.js'>",
+                    "<script src='xxx.js'>",
+                    "<script href='xxx.js'>"
+                    ],
+                correct: 1 
+            },   {
+                text: "The external JavaScript file must contain the <script> tag.",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "False",
+                    "True",
+                    ],
+                correct: 0
+            },  {
+                text: "How do you write 'Hello World' in an alert box?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "msgBox('Hello World');",
+                    "alertBox('Hello World');",
+                    "alert('Hello World');",
+                    "msg('Hello World');"
+                    ],
+                correct: 2
+            },  {
+                text: "How do you create a function in JavaScript?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "function = myFunction()",
+                    "function myFunction()",
+                    "function:myFunction()"
+                    ],
+                correct: 1
+            },   {
+                text: "How do you call a function named 'myFunction'?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "call myFunction()",
+                    "call function myFunction()",
+                    "myFunction()"
+                    ],
+                correct: 2
+            },   {
+                text: "How to write an IF statement in JavaScript?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "if (i == 5)",
+                    "if i = 5",
+                    "if i = 5 then",
+                    "if i == 5 then"
+                    ],
+                correct: 0
+            },  {
+                text: "How to write an IF statement for executing some code ifn 'i' is NOT equal to 5?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "if i <> 5)",
+                    "if (i != 5)",
+                    "if (i <> 5)",
+                    "if i =! 5 then"
+                    ],
+                correct: 1
+            }, {
+                text: "How does a WHILE loop start?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "while (i <= 10)",
+                    "while i = 1 to 10",
+                    "while ( i <= 10; i++)"
+                    ],
+                correct: 0
+            },  {
+                text: "How does a FOR loop start?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "for (i <= 5; i++)",
+                    "for i = 1 to 5",
+                    "for (i = 0; i <= 5)",
+                    "for (i = 0; i <= 5; i++)"
+                    ],
+                correct: 3
+            },   {
+                text: "How can you add a comment in JavaScript?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "'This is a comment",
+                    "//This is a comment",
+                    "<!--This is a comment-->"
+                    ],
+                correct: 1
+            },  {
+                text: "How to insert a comment that has more than one line?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "<!--This comment has more than one line -->",
+                    "/*This comment has more than one line*/",
+                    "//This comment has more than one line//"
+                    ],
+                correct: 1
+            }, {
+                text: "What is the correct way to write a JavaScript array?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "var colors = ['red', 'green', 'blue']",
+                    "var colors = (1:'red', 2:'green', 3:'blue')",
+                    "var colors = 'red', 'green', 'blue'",
+                    "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')"
+                    ],
+                correct: 0
+            },  {
+                text: "How do you round the number 7.25 to the nearest integer?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "rnd(7.25)",
+                    "Math.round(7.25)",
+                    "Math.rnd(7.25)",
+                    "round(7.25)"
+                    ],
+                correct: 1
+            }, {
+                text: "How do you find the number with the highest value of x and y?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "Math.max(x,y)",
+                    "cell(x,y)",
+                    "top(x,y)",
+                    "Math.ceil(x,y)"
+                    ],
+                correct: 0
+            }, {
+                text: "JavaScript is the same as Java.",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "True",
+                    "False"
+                    ],
+                correct: 1
+            }, {
+                text: "How do you declare a JavaScript variable?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "variable carName;",
+                    "v carName;",
+                    "var carName;"
+                    ],
+                correct: 2
+            },  {
+                text: "Which operator is used to assign a value to a variable?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "*",
+                    "-",
+                    "X",
+                    "="
+                    ],
+                correct: 3
+            },  {
+                text: "What will the following cod return: Boolean (10 > 9)?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "true",
+                    "false",
+                    "NaN"
+                    ],
+                correct: 0
+            },  {
+                text: "Is JavaScript case-sensitive?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "No",
+                    "Yes"
+                    ],
+                correct: 1
+            },
+
+        ];  
 /* initializing the index for the question array */        
 var questionId = 0;
 /* The max time on the timer - allow 20s per question */
 var timeLeft = 60;
 /* The max questions in the quiz */
-var numQuestions = 3;
+var numQuestions = 6;
 /* The setInterval ID */
 var timeInterval = 1;
 /* Counter used to track the current question across functions */
@@ -92,7 +310,7 @@ var startButtonEl = document.createElement("button");
 var countDown = function () {
     
     timeInterval = setInterval(function(){
-        console.log("timeInterval  " + timeInterval);
+
         /* The timer counts down changing the displayed seconds every second.  This runs in the background. */
         if ( timeLeft > 0 ) {
             timerEl.textContent = timeLeft;
@@ -163,13 +381,11 @@ var runQuiz = function () {
 
  /* Select and load questions  */
 if (questionCounter < numQuestions){
-    console.log("This is the  " + questionCounter + " time through the question loop" );
     /* randomly select a question from the question array */
-    // questionId = Math.floor(Math.random() * questionObjArray.length);
+    questionId = Math.floor(Math.random() * questionObjArray.length);
 
     /* Just using the following expression while the question database is so limited */
-    questionId = questionCounter;
-    console.log("The question ID is " + questionId);
+    // questionId = questionCounter;
 
     loadQuestions(questionId);
 } 
@@ -243,7 +459,6 @@ var questionSectionEl = document.createElement("div");
 
 /* This function needs to check the score against the high score for this player and update it in localStorage if it is higher */
 var saveInitials = function () {
-// debugger;
 
     /* initialize flags */
     var initialFlagSet = false;
@@ -293,11 +508,9 @@ var saveInitials = function () {
     restartButtonEl.textContent="ReStart";
     mainContentEl.appendChild(restartButtonEl);
 
-
     if (highscoreFlagSet) {
         loadHighScores();
     }
-
  };
 
 /* Placeholder for high scores page function */
@@ -350,7 +563,6 @@ else {
     highscoresDivEl.appendChild(highscoreEl);
 }
 
-
 /* Create buttons to go back and clear the current players high score */
 
 var highscoreButtonsEl=document.createElement("div");
@@ -359,7 +571,7 @@ mainContentEl.appendChild(highscoreButtonsEl);
 
 var backButtonEl=document.createElement("button");
 backButtonEl.className="back-btn";
-backButtonEl.textContent="Go Back";
+backButtonEl.textContent="ReStart";
 highscoreButtonsEl.appendChild(backButtonEl);
 
 var clearButtonEl=document.createElement("button");
@@ -371,6 +583,16 @@ highscoreButtonsEl.appendChild(clearButtonEl);
 
 /* Function called by Clear High Score button to clear the current players high score  from local storage */
 var clearHighScore = function () {
+
+/* Search current scoresObjArray(a global variable) for current initials object and delete that object */
+for ( i = 0; i < scoresObjArray.length; i++) {
+    if ( scoresObjArray[i].initials === initials ) {
+       scoresObjArray.splice(i,1);
+    }
+}
+
+/* Save the scoresObjArray less the deleted object */
+localStorage.setItem("scores", JSON.stringify(scoresObjArray));
 
 loadHighScores();
 
@@ -470,7 +692,6 @@ var quizOver = function () {
     /* stop the clock if it is not already stoped */
     clearInterval(timeInterval);
     timerEl.textContent = timeLeft;
-    console.log("The quiz is over.  " + timeLeft + " seconds remaining");
 
     clearPage();
 
