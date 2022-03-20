@@ -365,7 +365,7 @@ var clearPage =function () {
 var startQuiz = function () {
   
    /* reinitiallize the time left */
-   timeLeft=60;
+   timeLeft=90;
 
    /* reinitialize the question counter */
    questionCounter=0;
@@ -385,6 +385,8 @@ var runQuiz = function () {
 if (questionCounter < numQuestions){
     /* randomly select a question from the question array */
     questionId = Math.floor(Math.random() * questionObjArray.length);
+    console.log(questionObjArray.length);
+    console.log(questionId);
 
     /* Just using the following expression while the question database is so limited */
     // questionId = questionCounter;
@@ -735,7 +737,7 @@ var inputInitialsEl=document.createElement("input");
 
 var inputButtonEl=document.createElement("input");
     inputButtonEl.className="init-btn";
-    inputButtonEl.type="submit";
+    inputButtonEl.type="button";
     inputButtonEl.value="Submit";
     formInitialsEl.appendChild(inputButtonEl);
 
