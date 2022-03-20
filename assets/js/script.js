@@ -292,6 +292,8 @@ var scoresObjArray = [{
                 }];  
 /* Current player initials - used across functions */
 var initials = "";
+/* The penalty in seconds for an incorrect answer */
+var penalty = 10;
                 
 
 /* Create Start page */
@@ -613,8 +615,8 @@ var buttonHandler = function (event) {
                 break;
             } else { 
                 /* On an incorrect answer, subtract 20 seconds from the timer and load a new question */
-                if (timeLeft >=20){
-                    timeLeft = timeLeft - 20;
+                if (timeLeft >=penalty){
+                    timeLeft = timeLeft - penalty;
                 } else { 
                     timeLeft = 0
                 }
@@ -626,8 +628,8 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                if (timeLeft >=20){
-                    timeLeft = timeLeft - 20;
+                if (timeLeft >=penalty){
+                    timeLeft = timeLeft - penalty;
                 } else { 
                     timeLeft = 0;
                 }
@@ -639,8 +641,8 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                if (timeLeft >=20){
-                    timeLeft = timeLeft - 20;
+                if (timeLeft >=penalty){
+                    timeLeft = timeLeft - penalty;
                 } else { 
                     timeLeft = 0;
                 }
@@ -652,8 +654,8 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                if (timeLeft >=20){
-                    timeLeft = timeLeft - 20;
+                if (timeLeft >=penalty){
+                    timeLeft = timeLeft - penalty;
                 } else { 
                     timeLeft = 0;
                 }
