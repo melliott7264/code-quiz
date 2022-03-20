@@ -5,7 +5,7 @@
 This is a timed quiz on JavaScript code:
 
 - This purpose of this project is to reinforce JavaScript coding skills by:
-    - acctually implementing a challenging JavaScript application and
+    - actually implementing a challenging JavaScript application and
     - by providing Javascript students the opportunity strengthen their retention of JavaScript code syntax.
 
 
@@ -22,11 +22,9 @@ At the conclusion of a game, if this is the fisrt time you played or you beat yo
 
 You can click on the View Highscore button at any time, but the Clear High Score button will only work once you complete a game and enter a set of initials.   The highscore for the last initials entered are deleted.  Click on the ReStart button to start another game.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+  
+![Code Quiz screenshot](./assets/images/ScreenShot.png)
+   
 
 ## Credits
 
