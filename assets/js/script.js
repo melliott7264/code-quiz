@@ -385,8 +385,6 @@ var runQuiz = function () {
 if (questionCounter < numQuestions){
     /* randomly select a question from the question array */
     questionId = Math.floor(Math.random() * questionObjArray.length);
-    console.log(questionObjArray.length);
-    console.log(questionId);
 
     /* Just using the following expression while the question database is so limited */
     // questionId = questionCounter;
