@@ -62,15 +62,19 @@ var timeLeft = 60;
 var numQuestions = 3;
 /* The setInterval ID */
 var timeInterval = 1;
-/* Used to track the current question across functions */
+/* Counter used to track the current question across functions */
 var questionCounter = 0;
+/* Initialized array of objects to store scores and initials */
 var scoresObjArray = [{
                 initials: "ABC",
                 score:  0
                 }, {
                 initials: "DEF",
                 score:  0    
-                }];              
+                }];  
+/* Current player initials - used across functions */
+var initials = "";
+                
 
 /* Create Start page */
 
@@ -84,8 +88,6 @@ var startButtonEl = document.createElement("button");
     startButtonEl.textContent = "START";
     mainContentEl.appendChild(startButtonEl);
    
-            
-        
 /* Timer Function */
 var countDown = function () {
     
@@ -126,7 +128,15 @@ var clearPage =function () {
     if (scoreDivEl=document.querySelector(".score-align")) {
         scoreDivEl.remove();}
     if (restartButtonEl=document.querySelector(".restart-btn")) {
-        restartButtonEl.remove();}   
+        restartButtonEl.remove();}  
+
+    /* High Score Page Elements to be cleared */
+    if (highscoresHeadEl=document.querySelector(".highscore-heading")) {
+        highscoresHeadEl.remove();}
+    if (highscoresDivEl=document.querySelector(".high-scores")) {
+        highscoresDivEl.remove();}
+    if (highscoreButtonEl=document.querySelector(".highscore-btns")) {
+        highscoreButtonEl.remove();}  
 
     return;
 };
@@ -150,8 +160,8 @@ var startQuiz = function () {
 
 /* This function randomly selects a question and passes that question to the loadQuestions function */
 var runQuiz = function () {
- /* Select and load questions  */
 
+ /* Select and load questions  */
 if (questionCounter < numQuestions){
     console.log("This is the  " + questionCounter + " time through the question loop" );
     /* randomly select a question from the question array */
@@ -204,7 +214,6 @@ var questionSectionEl = document.createElement("div");
      questionEl.className="question";
      questionEl.textContent=questionObjArray[questionId].text;
      questionSectionEl.appendChild(questionEl);
-
    
  /* If code is a part of the question, create the elements and append them */
  if (questionObjArray[questionId].code) {
@@ -241,7 +250,7 @@ var saveInitials = function () {
     var highscoreFlagSet = false;
 
     /* Get the initials, button element  and heading element(if needed) */
-    var initials = document.getElementById("initials").value;
+    initials = document.getElementById("initials").value;
     var mainHeadingEl = document.getElementById("main-heading");
 
     /* Load the highscores database from localStorage */
@@ -294,7 +303,77 @@ var saveInitials = function () {
 /* Placeholder for high scores page function */
 var loadHighScores = function () {
 
+/* Clear the main content area first */
+clearPage();
+
+/* Build High Scores page with scores */
+var highscoresHeadEl=document.createElement("h2");
+highscoresHeadEl.className="highscore-heading";
+highscoresHeadEl.textContent="High Scores!";
+mainContentEl.appendChild(highscoresHeadEl);
+
+var highscoresDivEl=document.createElement("div");
+highscoresDivEl.className="high-scores";
+mainContentEl.appendChild(highscoresDivEl);
+
+/* If a local scores database is present, print out all the scores sorted highest to lowest */
+/* Read the local scores file and assign it to the scoresObjArray */
+if (localStorage.getItem("scores")) {
+    var highScores = localStorage.getItem("scores");
+    scoresObjArray = JSON.parse(highScores);
+
+    /* Sort array in decending order by score */
+    scoresObjArray.sort(function(a, b){
+        return b.score - a.score; 
+    });
+
+    /* Print ouf the list of initials and scores */
+    for ( i = 0; i < scoresObjArray.length; i++){
+
+        /* get initials and score */
+        var sortedInitials = scoresObjArray[i].initials;
+        var sortedScore = scoresObjArray[i].score;
+
+        /* create paragraph elements with highscores */
+        var highscoreEl=document.createElement("p");
+        highscoreEl.className = "highscores";
+        highscoreEl.textContent = sortedInitials + "  ...........  " + sortedScore;
+        highscoresDivEl.appendChild(highscoreEl);
+    }
+}
+else {
+    /* If no local database file is present. print the initals and score of the current player */
+      
+    var highscoreEl=document.createElement("p");
+    highscoreEl.className = "highscores";
+    highscoreEl.textContent = initials + "  ...........  " + timeLeft;
+    highscoresDivEl.appendChild(highscoreEl);
+}
+
+
+/* Create buttons to go back and clear the current players high score */
+
+var highscoreButtonsEl=document.createElement("div");
+highscoreButtonsEl.className="highscore-btns";
+mainContentEl.appendChild(highscoreButtonsEl);
+
+var backButtonEl=document.createElement("button");
+backButtonEl.className="back-btn";
+backButtonEl.textContent="Go Back";
+highscoreButtonsEl.appendChild(backButtonEl);
+
+var clearButtonEl=document.createElement("button");
+clearButtonEl.className="clear-btn";
+clearButtonEl.textContent="Clear High Score";
+highscoreButtonsEl.appendChild(clearButtonEl);
  
+};
+
+/* Function called by Clear High Score button to clear the current players high score  from local storage */
+var clearHighScore = function () {
+
+loadHighScores();
+
 };
 
 /* This function evaluates clicks on the answer buttons as well as the intials submit, back and clear buttons */
@@ -374,9 +453,10 @@ var buttonHandler = function (event) {
             startQuiz();
             break;
         case "back-btn":
+            startQuiz();
             break;
-
         case "clear-btn":
+            clearHighScore();
             break;
         default:
             break;
