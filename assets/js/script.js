@@ -275,7 +275,7 @@ var questionObjArray = [{
 /* initializing the index for the question array */        
 var questionId = 0;
 /* The max time on the timer - allow 20s per question */
-var timeLeft = 60;
+var timeLeft = 90;
 /* The max questions in the quiz */
 var numQuestions = 6;
 /* The setInterval ID */

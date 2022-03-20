@@ -18,6 +18,10 @@ However, this applicaton does save high scores to the "scores" file under  Local
 
 You just run the application from this URL: https://melliott7264.github.io/code-quiz/.  Click on the Start button to begin.   The quiz gives you 60 seconds to answer six questions.  The time left on the timer after you have answered all the questions is your score.  You loose 10 seconds for each wrong answer.
 
+At the conclusion of a game, if this is the fisrt time you played or you beat your previous highscore, you are presented with a screen to enter you initials in order to save your score.   Just type in your intitials and click the Submit button.  Initials are case-sensitive.
+
+You can click on the View Highscore button at any time, but the Clear High Score button will only work once you complete a game and enter a set of initials.   The highscore for the last initials entered are deleted.  Click on the ReStart button to start another game.
+
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
 
     ```md

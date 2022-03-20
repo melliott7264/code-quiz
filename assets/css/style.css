@@ -1,3 +1,4 @@
+/* Inital styling is for mobile devices of 390px or better */
 /* Application color scheme */
 :root {
     --Primary-font: black;
@@ -46,7 +47,7 @@ main {
     margin: 0 auto;
 }
 
-h1, #main-content h2{
+h1, #main-content h2 {
     padding: 20px;
     font-size: 30px;
     text-align: center;
@@ -157,17 +158,94 @@ footer p {
 
 /* Start of styling for High Scores page */
 
-.highscores, .highscore-btns {
+.high-scores {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.highscore-btns {
     display: flex;
     justify-content: center;
 }
 
-.highscore-initial, .highscore {
-    width: 100px;
+.highscores {
+    width: 200px;
+    margin: 0 auto;
     padding: 10px 20px;
+    font-size: 20px;
+    text-align: center;
 }
 
 /* End of styling for High Scores page */
 
+/* Media Query Styling for screens over 800px */
+@media screen and (min-width: 800px) {
 
+    body {
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
+    #view-highscore, .timer-label, #timer, #start-btn{
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    #main-content {
+        max-width: 800px;
+    }
+
+    #main-content h2 {
+        font-size: 30px;
+    }
+
+    /* Default button appearance */
+    #view-highscore, #start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
+        border-radius: 15px;
+    }
+    #start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
+        font-size: 24px;
+    }
+
+    /* Instructions syling on Start page */
+
+    .instructions {
+        font-size: 20px;
+    }
+
+    /* Start of Done! page styling */
+
+     .score-align {
+        font-size: 24px;
+    }
+
+    .score-label, #score {
+        font-size: 30px;
+    }
+
+    .init-label, #initials {
+        font-size: 30px;
+    }
+    /* End of Done! page styling */
+
+    /* Start of styling for questions page */
+
+    .answer {
+        width: 500px;
+    }
+
+    /* End of styling for questions page */
+
+    /* Start of styling for High Scores page */
+
+    .highscores {
+        width: 300px;
+        font-size: 24px;
+    }
+
+    /* End of styling for High Scores page */
+}
