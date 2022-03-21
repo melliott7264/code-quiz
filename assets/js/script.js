@@ -487,7 +487,7 @@ var saveInitials = function () {
     if (!initialFlagSet || !localStorage.getItem("scores")) {
     highscoreFlagSet = true;
     mainHeadingEl.textContent="You have a new High Score!";
-    var scoresObj = new Object();
+    var scoresObj = {};
     scoresObj.initials = initials;
     scoresObj.score = timeLeft;
     scoresObjArray.push(scoresObj);
