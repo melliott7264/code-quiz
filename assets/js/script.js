@@ -283,13 +283,7 @@ var timeInterval = 1;
 /* Counter used to track the current question across functions */
 var questionCounter = 0;
 /* Initialized array of objects to store scores and initials */
-var scoresObjArray = [{
-                initials: "ABC",
-                score:  0
-                }, {
-                initials: "DEF",
-                score:  0    
-                }];  
+var scoresObjArray = [];
 /* Current player initials - used across functions */
 var initials = "";
 /* The penalty in seconds for an incorrect answer */
