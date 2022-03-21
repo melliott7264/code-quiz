@@ -412,12 +412,14 @@ if (questionCounter < numQuestions){
 
      /* randomly select a question from the question array */
      questionId = Math.floor(Math.random() * questionObjArray.length);
+     console.log(questionId);
 
     /* Check for duplicate questions */
     for (i = 0; i < checkDupQuestion.length; i++) {
-       if (checkDupQuestion[i] === questionId) {
-         /* If a duplicate is found, randomly select another question from the question array */
-        questionId = Math.floor(Math.random() * questionObjArray.length);     
+       while (checkDupQuestion[i] === questionId) {
+         /* If a duplicate is found, randomly select another question from the question array that is unique */
+         questionId = Math.floor(Math.random() * questionObjArray.length);  
+         console.log(questionId);   
        }
     }
     /* Add questionId (the array index for questionObjArray) to the check duplicate question array */
