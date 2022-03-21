@@ -59,7 +59,7 @@ var questionObjArray = [{
                 codesnips: [],
                 answers: [ 
                     "<js>",
-                    "<javascript",
+                    "<javascript>",
                     "<scripting>",
                     "<script>"
                     ],
@@ -251,7 +251,7 @@ var questionObjArray = [{
                     ],
                 correct: 3
             },  {
-                text: "What will the following cod return: Boolean (10 > 9)?",
+                text: "What will the following code return: Boolean (10 > 9)?",
                 code: false,
                 codesnips: [],
                 answers: [ 
@@ -315,6 +315,8 @@ var scoresObjArray = [];
 var initials = "";
 /* The penalty in seconds for an incorrect answer */
 var penalty = 10;
+/* This array is used to track used questions in a game */
+var checkDupQuestion = [];
                 
 
 /* Create Start page */
@@ -391,6 +393,9 @@ var startQuiz = function () {
    /* reinitialize the question counter */
    questionCounter=0;
 
+   /* reinitialize this array to check for duplicate questions */
+   checkDupQuestion = [];
+
    /* start the timer */
    countDown();
 
@@ -404,12 +409,21 @@ var runQuiz = function () {
 
  /* Select and load questions  */
 if (questionCounter < numQuestions){
-    /* randomly select a question from the question array */
-    questionId = Math.floor(Math.random() * questionObjArray.length);
 
-    /* Just using the following expression while the question database is so limited */
-    // questionId = questionCounter;
+     /* randomly select a question from the question array */
+     questionId = Math.floor(Math.random() * questionObjArray.length);
 
+    /* Check for duplicate questions */
+    for (i = 0; i < checkDupQuestion.length; i++) {
+       if (checkDupQuestion[i] === questionId) {
+         /* If a duplicate is found, randomly select another question from the question array */
+        questionId = Math.floor(Math.random() * questionObjArray.length);     
+       }
+    }
+    /* Add questionId (the array index for questionObjArray) to the check duplicate question array */
+    checkDupQuestion.push(questionId);
+    console.log(checkDupQuestion);
+    
     loadQuestions(questionId);
 } 
 else {
