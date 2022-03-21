@@ -147,6 +147,7 @@ footer p {
 
 .question, .code-section {
     padding: 10px 20px;
+    font-size: 20px;
 }
 
 .answer {
@@ -233,6 +234,10 @@ footer p {
     /* End of Done! page styling */
 
     /* Start of styling for questions page */
+
+    .question {
+        font-size: 24px;
+    }
 
     .answer {
         width: 500px;

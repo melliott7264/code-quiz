@@ -6,7 +6,7 @@ var timerEl = document.querySelector("#timer");
 /* This defines the element holding all the dynamic content */
 var mainContentEl = document.querySelector("#main-content");
 /* The quiz instructions displayed on the Start page */
-var instructions = "This is a timed quiz on JavaScript.  The goal is to answer four multiple choice questions correctly in the least amount of time.  Your score is the time remaining on the clock once all the questions are answered.  The clock will start at 90 seconds.  You will loose 20 seconds for each incorrect answer.  Click the Start button to begin the test.  Good Luck!";
+var instructions = "This is a timed quiz on JavaScript.  The goal is to answer six multiple choice questions correctly in the least amount of time.  Your score is the time remaining on the clock once all the questions are answered.  The clock will start at 90 seconds.  You will loose 10 seconds for each incorrect answer.  Click the Start button to begin the test.  Good Luck!";
 /* The object array holding all the quiz questions and answers */
 /* The questions came from the Boot Camp async lessons and from W3Schools */
 var questionObjArray = [{
@@ -136,7 +136,7 @@ var questionObjArray = [{
                     ],
                 correct: 0
             },  {
-                text: "How to write an IF statement for executing some code ifn 'i' is NOT equal to 5?",
+                text: "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
                 code: false,
                 codesnips: [],
                 answers: [ 
@@ -269,8 +269,35 @@ var questionObjArray = [{
                     "Yes"
                     ],
                 correct: 1
-            },
-
+            },  {
+                text: "The DOM is built into the JavaScript language?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "True",
+                    "False"
+                    ],
+                correct: 1
+            },{
+                text: "What does event.preventDefault() do?",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "It stops the browser from reloading the page upon a form submission.",
+                    "It stops the browser from allowing the form submission event to occur"
+                    ],
+                correct: 0
+            },{
+                text: "The browser event submit allows us to do the following:",
+                code: false,
+                codesnips: [],
+                answers: [ 
+                    "Submit a form using a button.",
+                    "Submit a form using the Enter key.",
+                    "Submit a form using both the button and the Enter key."
+                    ],
+                correct: 2
+            }
         ];  
 /* initializing the index for the question array */        
 var questionId = 0;
