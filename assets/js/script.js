@@ -350,7 +350,7 @@ var countDown = function () {
 
 };
 
-/* This function clears away the unneeded elementes between dynamic page updates */
+/* This function clears away the unneeded elements between dynamic page updates */
 var clearPage =function () {
 
     /* Start Page Elements to be cleared */
