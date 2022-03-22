@@ -648,7 +648,7 @@ var buttonHandler = function (event) {
                 nextQuestion();
                 break;
             } else { 
-                /* On an incorrect answer, subtract 20 seconds from the timer and load a new question */
+                /* On an incorrect answer, subtract penalty seconds from the timer, display an error message and load a new question */
                 if (timeLeft >=penalty){
                     timeLeft = timeLeft - penalty;
                 } else { 

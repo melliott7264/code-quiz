@@ -6,19 +6,19 @@ This is a timed quiz on JavaScript code:
 
 - This purpose of this project is to reinforce JavaScript coding skills by:
     - actually implementing a challenging JavaScript application and
-    - by providing Javascript students the opportunity strengthen their retention of JavaScript code syntax.
+    - by indentifing areas of weakness in JavaScript that need more study.
 
 
 ## Installation
 
-As this is a web application, there is not installation per se.   You just run the application from this URL: https://melliott7264.github.io/code-quiz/
-However, this applicaton does save high scores to the "scores" file under  Local Storage on the browser.  If you want to delete the scores file, open the Developer Tools (alt - command -  i on a Mac ) go to the Application tab, locate the file "scores" under Local Storage and delete it.
+As this is a web application, there is no installation per se.   You just run the application from this URL: https://melliott7264.github.io/code-quiz/
+However, this applicaton does save high scores to the "scores" file under  Local Storage on the browser.  If you want to delete the scores file, open the Developer Tools (alt-command-i on a Mac ) go to the Application tab, locate the file "scores" under Local Storage and delete it.
 
 ## Usage
 
-You just run the application from this URL: https://melliott7264.github.io/code-quiz/.  Click on the Start button to begin.   The quiz gives you 60 seconds to answer six questions.  The time left on the timer after you have answered all the questions is your score.  You loose 10 seconds for each wrong answer.
+You just run the application from this URL: https://melliott7264.github.io/code-quiz/.  Click on the Start button to begin.   The quiz gives you 90 seconds to answer six unique questions.  The time left on the timer after you have answered all the questions is your score.  You loose 10 seconds for each wrong answer.
 
-At the conclusion of a game, if this is the fisrt time you played or you beat your previous highscore, you are presented with a screen to enter you initials in order to save your score.   Just type in your intitials and click the Submit button.  Initials are case-sensitive.
+At the conclusion of a game, if this is the first time you played or you beat your previous highscore, you are presented with a screen to enter you initials in order to save your score.   Just type in your intitials and click the Submit button.  Initials are case-sensitive.
 
 You can click on the View Highscore button at any time, but the Clear High Score button will only work once you complete a game and enter a set of initials.   The highscore for the last initials entered are deleted.  Click on the ReStart button to start another game.
 

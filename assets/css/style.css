@@ -5,6 +5,7 @@
     --Secondary-font: #8a2be2;
     --Primary-background: white;
     --Secondary-background: black;
+    --Answer-background: #f4f0f0;
 }
 
 /* Reset Defaults */
@@ -21,6 +22,13 @@
 
 header {
     height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timer-group {
+    display: flex;
+    justify-content: flex-end;
 }
 
 #view-highscore, .timer-label, #timer, #start-btn{
@@ -29,14 +37,6 @@ header {
     font-size: 20px;
     font-weight: 700;
 }
-
-#view-highscore {
-    float: left;
-}
-
-.timer-label, #timer {
-    float: right;
- }
 
 main {
     height: 80vh;
@@ -79,7 +79,7 @@ footer p {
 #view-highscore, #start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
     border: 3px solid var(--Secondary-font);
     border-radius: 10px;
-    background-color: #f4f0f0;
+    background-color: var(--Answer-background);
 }
 #start-btn, .answer, .back-btn, .clear-btn, .init-btn, .restart-btn {
     padding: 10px 10px;
